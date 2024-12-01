@@ -1,4 +1,4 @@
-# My solutions for the Advent of Code 2xx puzzles
+# My solutions for the Advent of Code 2024 puzzles
 
 I travel back in time to 2024 to solve the puzzles from the [Advent of Code](https://adventofcode.com/2024) event.
 
