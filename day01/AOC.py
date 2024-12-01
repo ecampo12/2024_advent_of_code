@@ -1,22 +1,11 @@
 from collections import Counter
 
-def parse_input(input):
-    list1, list2 = [], []
-    for i in input:
-        a, b = map(int, i.split())
-        list1.append(a)
-        list2.append(b)
-    return list1, list2
-
 def part1(input):
-    list1, list2 = parse_input(input) 
-    sorted_list1 = sorted(list1)
-    sorted_list2 = sorted(list2)
-
-    return sum([abs(sorted_list1[i] - sorted_list2[i]) for i in range(len(sorted_list1))])
+    list1, list2 = map(list, zip(*[map(int, i.split()) for i in input]))
+    return sum([abs(a - b) for a, b in zip(sorted(list1), sorted(list2))])
 
 def part2(input):
-    list1, list2 = parse_input(input)
+    list1, list2 = map(list, zip(*[map(int, i.split()) for i in input]))
     count = Counter(list2)
     return sum([i * c for i in list1 for c in [count[i] if i in count else 0]])
 
