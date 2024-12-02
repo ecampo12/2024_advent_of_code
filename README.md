@@ -14,4 +14,4 @@ I will mainly be using python, but I might try some other languages as well.
 
 - python solutions were written in python 3.12.3, and may not work on older versions.
 
-- Kotlin solutions were written in Kotlin 2.1.0
+- Kotlin solutions were written in Kotlin 2.1.0, [Kotlin template](https://github.com/kotlin-hands-on/advent-of-code-kotlin-template)
