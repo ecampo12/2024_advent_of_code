@@ -16,7 +16,7 @@ fun main() {
         return part1(
             listOf(
                 input.joinToString("")
-                    .replace("""don't\([^)]*\).*?(?=do\([^)]*\)|${'$'})""".toRegex(), "")
+                    .replace("""don't\(\).*?(?=do\(\)|${'$'})""".toRegex(), "")
             )
         )
     }
