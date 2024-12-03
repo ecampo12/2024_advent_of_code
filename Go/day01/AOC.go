@@ -5,14 +5,8 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"utils"
 )
-
-func abs(n int) int {
-	if n < 0 {
-		return -n
-	}
-	return n
-}
 
 func part1(input []string) int {
 	a := make([]int, len(input))
@@ -27,7 +21,7 @@ func part1(input []string) int {
 
 	sum := 0
 	for i := range a {
-		sum += abs(a[i] - b[i])
+		sum += utils.Abs(a[i] - b[i])
 	}
 	return sum
 }
@@ -48,7 +42,7 @@ func part2(input []string) int {
 		fmt.Sscanf(line, "%d %d", &a[i], &b[i])
 	}
 
-	c := count(b)
+	c := utils.Counter(b)
 	sum := 0
 	for _, n := range a {
 		sum += n * c[n]
