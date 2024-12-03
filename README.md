@@ -12,6 +12,8 @@ I will mainly be using python, but I might try some other languages as well.
 
 - I will try to not post my puzzle input, so you will have to get your own.
 
+- Go solutions were written in go1.23.3, and may not work on older versions.
+
 - python solutions were written in python 3.12.3, and may not work on older versions.
 
 - Kotlin solutions were written in Kotlin 2.1.0, [Kotlin template](https://github.com/kotlin-hands-on/advent-of-code-kotlin-template)
