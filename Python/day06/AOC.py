@@ -1,52 +1,32 @@
-def traverse(input, part2=False):
-    directions = [(-1, 0), (0, -1), (1, 0), (0, 1)]
-    start = (0, 0)
+def find_start(input):
     for row in range(len(input)):
         for col in range(len(input[row])):
             if input[row][col] == "^":
-                start = (row, col)
-                break
-        else:
-            continue
-        break
-    
+                return (row, col)
+    return None
+
+def traverse(input, start, part2=False):
+    directions = [(-1, 0), (0, -1), (1, 0), (0, 1)]    
     curr = start
     path = set()
     facing = 0
     while True > 0:
-        if part2:
-            path.add((curr, facing))
-        else:
-            path.add(curr)
+        path.add(curr)
         dr, dc = directions[facing]
         if dr + curr[0] < 0 or dr + curr[0] >= len(input) or dc + curr[1] < 0 or dc + curr[1] >= len(input[0]):
-            if part2:
-                return False
             break
         if input[curr[0] + dr][curr[1]+ dc] == "#":
             facing = (facing - 1) % 4
         else:
             curr = (curr[0] + directions[facing][0], curr[1] + directions[facing][1])
-        
-        if part2 and (curr, facing) in path:
-            return True
     return path
     
 def part1(input):
-    return len(traverse(input.splitlines()))
+    grid = input.splitlines()
+    return len(traverse(grid, find_start(grid)))
 
-def loop(grid):
+def loop(grid, start):
     directions = [(-1, 0), (0, -1), (1, 0), (0, 1)]
-    start = (0, 0)
-    for row in range(len(grid)):
-        for col in range(len(grid[row])):
-            if grid[row][col] == "^":
-                start = (row, col)
-                break
-        else:
-            continue
-        break
-    
     curr = start
     path = set()
     facing = 0
@@ -64,14 +44,15 @@ def loop(grid):
     
 def part2(input):
     input = input.splitlines()
-    paths = traverse(input)
+    start = find_start(input)
+    paths = traverse(input, start)
     count = 0
     for p in paths:
         row, col = p
-        if input[row][col] == ".":
+        if p != start:
             grid = input.copy()
             grid[row] = grid[row][:col] + "#" + grid[row][col+1:]
-            if traverse(grid, True):
+            if loop(grid, start):
                 count += 1
     return count
 
