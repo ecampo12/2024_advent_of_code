@@ -1,30 +1,15 @@
 from itertools import product
 
 def parse_input(input):
-    lock_schematics = []
-    key_schematics = []
-    
+    locks, keys = [], []
     for s in input.split("\n\n"):
         if s[0] == '.':
-            key_schematics.append(s)
+            transposed = [list(x) for x in zip(*s.split("\n"))] # learned this last year, tanspose rows and columns
+            locks.append([6 - ''.join(line).index('#') for line in transposed]) # 6 is the height of the lock/key
         else:
-            lock_schematics.append(s)
-    locks = []
-    keys = []
-    
-    for s in lock_schematics:
-        lock = []
-        transposed = [list(x) for x in zip(*s.split("\n"))] # learned this last year, tanspose rows and columns
-        for line in transposed:
-            lock.append(''.join(line).rindex('#'))
-        locks.append(lock)
-    
-    for s in key_schematics:
-        key = []
-        transposed = [list(x)[::-1] for x in zip(*s.split("\n"))] # we reverse the list rotate counter clockwise
-        for line in transposed:
-            key.append(''.join(line).rindex('#'))
-        keys.append(key)
+            transposed = [list(x) for x in zip(*s.split("\n"))]
+            keys.append([''.join(line).rindex('#') for line in transposed])
+
     return locks, keys
 
 def part1(input):
