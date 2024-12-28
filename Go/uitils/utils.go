@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"reflect"
 	"time"
 )
 
@@ -38,4 +39,71 @@ func Counter[t comparable](nums []t) map[t]int {
 		m[n]++
 	}
 	return m
+}
+
+// MapContains is a function that takes a map and a value and returns true if the value is in the map
+func MapContainsValue[t comparable, u any](m map[t]u, value u) bool {
+	for _, v := range m {
+		if reflect.DeepEqual(v, value) {
+			return true
+		}
+	}
+	return false
+}
+
+// Repeat is a function that takes a value and a number and returns a slice of the value repeated n times
+func Repeat[t any](m t, n int) []t {
+	x := Abs(n)
+	res := make([]t, x)
+	for i := range res {
+		res[i] = m
+	}
+	return res
+}
+
+// Int is a function that takes a string and returns the integer value of that string
+func Int(s string) int {
+	var n int
+	fmt.Sscanf(s, "%d", &n)
+	return n
+}
+
+// SliceMin is a function that takes a slice of values and returns the minimum value depending on the given function
+func SliceMin[t any](s []t, f func(t) int) t {
+	min := s[0]
+	for _, v := range s {
+		if f(v) < f(min) {
+			min = v
+		}
+	}
+	return min
+}
+
+// SliceMax is a function that takes a slice of values and returns the maximum value depending on the given function
+func SliceMax[t any](s []t, f func(t) int) t {
+	max := s[0]
+	for _, v := range s {
+		if f(v) > f(max) {
+			max = v
+		}
+	}
+	return max
+}
+
+// Apply is a function that takes a slice of values and a function and returns a slice of the values after applying the function
+func Apply[t any, u any](s []t, f func(t) u) []u {
+	res := make([]u, len(s))
+	for i, v := range s {
+		res[i] = f(v)
+	}
+	return res
+}
+
+// ApplySum is a function that takes a slice of values and a function and returns the sum of the values after applying the function
+func ApplySum[t any](s []t, f func(t) int) int {
+	sum := 0
+	for _, v := range s {
+		sum += f(v)
+	}
+	return sum
 }
