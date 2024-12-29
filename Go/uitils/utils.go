@@ -107,3 +107,37 @@ func ApplySum[t any](s []t, f func(t) int) int {
 	}
 	return sum
 }
+
+// All is a function that takes a slice of values and a function and returns true if the function returns true for all the values
+func All[t any](s []t, f func(t) bool) bool {
+	for _, v := range s {
+		if !f(v) {
+			return false
+		}
+	}
+	return true
+}
+
+// A genric struct for a set
+type Set[t comparable] map[t]bool
+
+// NewSet is a function that returns a new set
+func NewSet[t comparable]() Set[t] {
+	return make(map[t]bool)
+}
+
+func (s Set[t]) Add(value t) {
+	s[value] = true
+}
+
+func (s Set[t]) Remove(value t) {
+	delete(s, value)
+}
+
+func (s Set[t]) ToSlice() []t {
+	res := make([]t, 0, len(s))
+	for k := range s {
+		res = append(res, k)
+	}
+	return res
+}
